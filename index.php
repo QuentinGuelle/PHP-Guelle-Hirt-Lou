@@ -34,5 +34,6 @@ $work = new Works;
         }
 
     ?>
+    <a href="logout.php">Se deconnecter</a>
 </body>
 </html>

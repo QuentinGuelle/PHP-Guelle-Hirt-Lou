@@ -6,7 +6,7 @@ include_once("php/code.php");
 $user = new Users;
 if(isset($_SESSION["account"]["id"]))
 {
-    header('Location: /PHP-Guelle-Hirt-Lou');
+    header('Location: ./PHP-Guelle-Hirt-Lou/index.php');
 }
 if(isset($_POST["submit"]))
 {
@@ -45,22 +45,24 @@ if(isset($_POST["submit"]))
 <body>
 
     <div class="limiter">
-        <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+        <div class="container-login100" style="background-image: url('images/bg-03.jpg');">
             <div class="wrap-login100">
-                <form class="login100-form validate-form">
+                <form class="login100-form validate-form" action="login.php" method="post">
                     <span class="login100-form-logo">
-                        <i class="zmdi zmdi-landscape"></i>
+                        <img src="images/bg-02.png" class="warfare">
                     </span>
+
                     <span class="login100-form-title p-b-34 p-t-27">
                         Se connecter
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                        <input class="input100" type="text" name="username" placeholder="Nom d'utilisateur">
+                        <input class="input100" type="text" name="uname" placeholder="Nom d'utilisateur" required>
                         <span class="focus-input100" data-placeholder="&#xf207;"></span>
                     </div>
+
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input class="input100" type="password" name="pass" placeholder="Mot de passe">
+                        <input class="input100" type="password" name="psw" placeholder="Mot de passe" required>
                         <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
 
