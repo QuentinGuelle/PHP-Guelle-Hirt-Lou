@@ -34,6 +34,23 @@ h1, h2, h3, h4, h5,
   padding: 0 1em 0em 1em;
 }
 
+.bouton2 {
+  padding:6px 0 6px 0;
+  font:bold 13px Arial;
+  background:#478bf9;
+  color:#fff;
+  border-radius:2px;
+  width:200px;
+  height: 50px;
+  border:none;
+}
+
+button {
+  width:110px;
+  cursor:pointer;
+  text-transform:capitalize;
+}
+
 .text{
   text-align: center!important;
 }

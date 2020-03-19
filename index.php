@@ -81,16 +81,21 @@ $resume = new Resumes;
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="#home-section" class="nav-link">Accueil</a></li>
                 <li><a href="#work-section" class="nav-link">Travaux</a></li>
+                <?php if(isset($_SESSION["account"]["username"]))
+                    {
+                        echo '<li><a href="form.php" class="nav-link"><u>Publier</u></a></li>';
+                    }
+                  ?>
                 <li>
-                	<?php if(isset($_SESSION["account"]["username"]))
-					    {
-					        echo '<a href="logout.php"><u>Se déconnecter</u></a>';
-					    }
-					    else{
-					        echo '<a href="login.php"><u>Se connecter</u></a>';
-					    }
-					?>
-				</li>
+                  <?php if(isset($_SESSION["account"]["username"]))
+      					    {
+      					        echo '<a href="logout.php"><u>Se déconnecter</u></a>';
+      					    }
+      					    else{
+      					        echo '<a href="login.php"><u>Se connecter</u></a>';
+      					    }
+                  ?>
+				        </li>
               </ul>
             </nav>
           </div>
@@ -114,13 +119,18 @@ $resume = new Resumes;
             <div class="row justify-content-center mb-4">
               <div class="col-md-8 text-center">
                 <h1>On adore <span class="typed-words"></span></h1>
-                <p class="lead mb-5">Portfolio incroyable de <a href="#" target="_blank">Quentin Anthony et Lucas</a> </br></br><?php
-        $allresumes = $resume->get_resumes();
-        foreach($allresumes as $r) {
-            echo($r["description"]);
-        }
-    			?></p>
-      <a class="btn" href="modifdesc.php?idPost=1"><u>Modifier</u></a>
+                <p class="lead mb-5">Portfolio incroyable de <a href="#" target="_blank">Quentin Anthony et Lucas</a> </br></br>
+                  <?php
+                    $allresumes = $resume->get_resumes();
+                    foreach($allresumes as $r) {
+                        echo($r["description"]);
+                    }
+              		?></p>
+                  <?php if(isset($_SESSION["account"]["username"]))
+                    {
+                        echo '<a class="btn" href="modifdesc.php?idPost=1"><u>Modifier</u></a>';
+                    }
+                  ?>
               </div>
             </div>
 
@@ -181,6 +191,11 @@ $resume = new Resumes;
         <div class="row mb-5 justify-content-center">
           <div class="col-md-8 text-center">
             <h2 class="text-black h1 site-section-heading text-center">Articles</h2>
+            <?php if(isset($_SESSION["account"]["username"]))
+              {
+                echo '<button class="bouton2"><a href="form.php">Ajouter un article</a></button>';
+              }
+            ?>
           </div>
         </div>
       </div>
@@ -198,8 +213,14 @@ $resume = new Resumes;
               			<div class="article">
 	                		<h2><?php echo $w["title"]; ?></h2>
 	                		<p><?php echo $w["description"]; ?></p>
-	                		<a class="btn" href="modif.php?idPost=<?=$idPost?>"><u>Modifier</u></a>
-	                		<a class="btn" href="delete.php?idPost=<?=$idPost?>"><u>Supprimer</u></a>
+                      <?php if(isset($_SESSION["account"]["username"]))
+                        {
+                      ?>
+                          <a class="btn" href="modif.php?idPost=<?=$idPost?>"><u>Modifier</u></a>
+                          <a class="btn" href="delete.php?idPost=<?=$idPost?>"><u>Supprimer</u></a>
+                      <?php
+                        }
+                      ?>
             			</div>
             		</div>
         		</div>

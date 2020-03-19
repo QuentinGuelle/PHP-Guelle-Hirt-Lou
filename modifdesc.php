@@ -3,6 +3,14 @@
 session_start();
 include_once("php/code.php");
 $idPost = $_GET['idPost'];
+
+if(isset($_SESSION["account"]["id"])) {
+
+}
+else {
+  header('Location: /');
+}
+
 $resume = new Resumes;
 
 $allresumes = $resume->get_resumes();
@@ -31,7 +39,7 @@ if(isset($_POST["submit"]))
 ?>
 <html lang="fr">
   <head>
-    <title>Ajouter un article</title>
+    <title>Modifier la description</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -103,7 +111,16 @@ if(isset($_POST["submit"]))
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php#home-section" class="nav-link">Accueil</a></li>
                 <li><a href="index.php#work-section" class="nav-link">Travaux</a></li>
-                <li><a href="login.php" class="nav-link"><u>Se connecter</u></a></li>
+                <li>
+                  <?php if(isset($_SESSION["account"]["username"]))
+                    {
+                        echo '<a href="logout.php"><u>Se déconnecter</u></a>';
+                    }
+                    else{
+                        echo '<a href="login.php"><u>Se connecter</u></a>';
+                    }
+                  ?>
+                </li>
               </ul>
             </nav>
           </div>
@@ -131,7 +148,7 @@ if(isset($_POST["submit"]))
                     <form name="inscription" action="modifdesc.php?idPost=<?=$idPost?>" method="post">
                       
                       <div>
-                        <p class="formulaire-texte">Entrez la description : </p>
+                        <p class="formulaire-texte">Modifiez la description : </p>
                         <textarea cols="60" rows="10" wrap="hard" name="desc" required><?php echo $curr_description; ?></textarea> <br/><br/>
                       </div>
 

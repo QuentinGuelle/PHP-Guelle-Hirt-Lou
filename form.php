@@ -3,6 +3,13 @@
 session_start();
 include_once("php/code.php");
 
+if(isset($_SESSION["account"]["id"])) {
+
+}
+else {
+  header('Location: /');
+}
+
 $work = new Works;
 if(isset($_POST["submit"]))
 {
@@ -94,7 +101,16 @@ if(isset($_POST["submit"]))
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php#home-section" class="nav-link">Accueil</a></li>
                 <li><a href="index.php#work-section" class="nav-link">Travaux</a></li>
-                <li><a href="login.php" class="nav-link"><u>Se connecter</u></a></li>
+                <li>
+                  <?php if(isset($_SESSION["account"]["username"]))
+                    {
+                        echo '<a href="logout.php"><u>Se déconnecter</u></a>';
+                    }
+                    else{
+                        echo '<a href="login.php"><u>Se connecter</u></a>';
+                    }
+                  ?>
+                </li>
               </ul>
             </nav>
           </div>
