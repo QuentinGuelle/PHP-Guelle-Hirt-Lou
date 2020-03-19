@@ -2,15 +2,26 @@
 <?php
 session_start();
 include_once("php/code.php");
-
+$idPost = $_GET['idPost'];
 $work = new Works;
+
+$allworks = $work->get_works();
+foreach($allworks as $w){
+	if ($w['id'] == $idPost){
+		$curr_title = $w['title'];
+		$curr_description = $w['description'];
+	}
+}
+
+
 if(isset($_POST["submit"]))
 {
     if($_POST["submit"] === "Valider")
 {
     if($_POST['titl'] != NULL && $_POST['desc'] != NULL)
     {
-        $work->create($_POST["titl"], $_POST["desc"]);
+    	$idPost = $_GET['idPost'];
+        $work->update($_POST["titl"], $_POST["desc"], $idPost);
         header('Location: /index.php');
     }
     else
@@ -119,14 +130,14 @@ if(isset($_POST["submit"]))
               <div class="col-md-8 text-center">
                 <p class="formulaire">
                     <!-- ------------------------------------------------------------------------------------ -->
-                    <form name="inscription" action="form.php" method="post">
+                    <form name="inscription" action="modif.php?idPost=<?=$idPost?>" method="post">
                       
                       <div>
                         <p class="formulaire-texte">Entrez le nom de l'article : </p>
-                        <textarea cols="40" rows="1" wrap="hard" name="titl" required></textarea> <br/><br/>
+                        <textarea cols="40" rows="1" wrap="hard" name="titl" required><?php echo $curr_title; ?></textarea><br/><br/>
 
                         <p class="formulaire-texte">Entrez la description : </p>
-                        <textarea cols="60" rows="10" wrap="hard" name="desc" required></textarea> <br/><br/>
+                        <textarea cols="60" rows="10" wrap="hard" name="desc" required><?php echo $curr_description; ?></textarea> <br/><br/>
                       </div>
 
                       <input type="submit" name="submit" value="Valider"/>

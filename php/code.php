@@ -43,7 +43,7 @@ class Works {
     {
         global $db;
 
-        $request = "SELECT * FROM works";
+        $request = "SELECT * FROM works ORDER BY id DESC";
         $resultat = $db->query($request);
         $user = $resultat->fetchAll();
 
@@ -66,5 +66,32 @@ class Works {
         $request->execute([$title, $description, $id]);
     }
 
+    function delete($id){
+        global $db;
+
+        $request = $db->prepare('DELETE FROM works WHERE id=?');
+        $request->execute([$id]);
+    }
+
+}
+
+class Resumes {
+    function get_resumes(){
+        global $db;
+
+        $request = "SELECT * FROM resumes";
+        $resultat = $db->query($request);
+        $resume = $resultat->fetchAll();
+
+        return($resume);
+    }
+
+    function update($description, $id)
+    {
+        global $db;
+
+        $request = $db->prepare('UPDATE resumes SET description=? WHERE id=?');
+        $request->execute([$description, $id]);
+    }
 }
 ?>
