@@ -13,15 +13,11 @@ $work = new Works;
     <title>php</title>
 </head>
 <body>
-    <p>Bonjour <?php if(isset($_SESSION["account"]["username"]))
+    <?php if(isset($_SESSION["account"]["username"]))
     {
-        echo($_SESSION["account"]["username"]);
+        echo '<p>Bonjour ' . $_SESSION["account"]["username"] . '</p>';
     }
-    else
-    {
-        echo "NOT CONNECTED";
-    }
-        ?></p>
+    ?>
 
     <br>
     <?php
@@ -34,6 +30,19 @@ $work = new Works;
         }
 
     ?>
-    <a href="logout.php">Se deconnecter</a>
+    <?php if(isset($_SESSION["account"]["username"]))
+    {
+        $redir = 'logout.php';
+        $redirTxt = "Se deconnecter";
+        echo '<a href="logout.php">Se deconnecter</a>';
+    }
+    else{
+        $redir = "login.php";
+        $redirTxt = "Se connecter";
+        echo '<a href="login.php">Se connecter</a>';
+    }
+    ?>
+    <br><br>
+    <a href="form.php">Ajouter un article</a>
 </body>
 </html>

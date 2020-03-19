@@ -2,12 +2,12 @@
 <?php 
 session_start();
 $_SESSION["account"] = []; 
-header('Location: /PHP-Guelle-Hirt-Lou/login.php');
+header('Location: /index.php');
 ?>
 <html lang="fr">
 <head>
 	<meta charset="utf-8">
-	<title>Logout</title>
+	<title>Deconnexion</title>
 </head>
 <body>
 
